@@ -14,17 +14,28 @@ const Shop = () => {
             .then(data => setProducts(data))
     }, []);
 
-    useEffect( () =>{
+    useEffect(() => {
         const storedCart = getShoppingCart();
+        const myCrt = []
 
-        for (let id in storedCart){
-            const savedProduct = products.find( product => product.id === id)
-            const anitity = storedCart[id];
-            savedProduct.quantity = anitity;
-            console.log(savedProduct);
+        for (let id in storedCart) {
+            const savedProduct = products.find(product => product.id === id)
+            if (savedProduct) {
+                const anitity = storedCart[id];
+                savedProduct.quantity = anitity;
+                console.log("product", savedProduct);
+                myCrt.push(savedProduct);
+                
+            }
+
+            console.log(myCrt);
+
+
 
         }
-        
+
+        setCart(myCrt);
+
     }, [products])
 
     const handleAddToCart = (product) => {
@@ -34,11 +45,11 @@ const Shop = () => {
         // if product doesn't exist in the cart, then set quantity = 1
         // if exist update quantity by 1
         const exists = cart.find(pd => pd.id === product.id);
-        if(!exists){
+        if (!exists) {
             product.quantity = 1;
-            newCart= [...cart, product]
+            newCart = [...cart, product]
         }
-        else{
+        else {
             exists.quantity = exists.quantity + 1;
             const remaining = cart.filter(pd => pd.id !== product.id);
             newCart = [...remaining, exists];
