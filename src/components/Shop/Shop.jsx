@@ -34,7 +34,7 @@ const Shop = () => {
 
         }
 
-        setCart(myCrt);
+        setCart(myCart);
 
     }, [products])
 
