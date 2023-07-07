@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
+import State from '../State/State';
 
 const Nav = () => {
-    const [show, setShow] = useState(true);
+    const [open, setOpen] = useState(true);
 
     const bgChange = () => {
-        ul.color = "red";
-        
+        setOpen(!open);
     }
 
     return (
@@ -16,6 +16,7 @@ const Nav = () => {
                 <li>Pay</li>
                 <li>Login</li>
             </ul>
+            <State></State>
             
         </div>
     );
